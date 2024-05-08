@@ -7,6 +7,7 @@ const checkoutBtn = document.getElementById('checkout-btn')
 const closeModalBtn = document.getElementById('close-modal-btn')
 const cartCounter = document.getElementById('cart-count')
 const addressBtn = document.getElementById('address')
+const clinteBtn = document.getElementById('clinte')
 const addressWarn = document.getElementById('address-warn')
 const spanItem = document.getElementById("date-span")
 
@@ -135,6 +136,16 @@ addressBtn.addEventListener("input", (event) => {
         addressWarn.classList.add("hidden")
     }
 })
+
+clinteBtn.addEventListener("input", (event) => {
+
+    let inputValue = event.target.value
+
+    if (inputValue !== "") {
+        addressBtn.classList.remove("border-red-500")
+        addressWarn.classList.add("hidden")
+    }
+})
 checkoutBtn.addEventListener("click", () => {
 
     const isOpen = checkRestaurantIsOpen()
@@ -168,14 +179,14 @@ checkoutBtn.addEventListener("click", () => {
     const message = encodeURIComponent(cartItems)
     const phone = "11946918479"
 
-    window.open(`http://wa.me/${phone}?text=${message} Endereço:${addressBtn.value}`,"_blank")
+    window.open(`http://wa.me/${phone}?text=${message} Endereço:${addressBtn.value} Nome:${clinteBtn.value}`,"_blank")
 })
 
 
 const checkRestaurantIsOpen = () => {
     const data = new Date()
     const hora = data.getHours()
-    return hora >= 18 && hora < 22
+    return hora < 18 && hora < 22
 }
 
 const isOpen = checkRestaurantIsOpen()
